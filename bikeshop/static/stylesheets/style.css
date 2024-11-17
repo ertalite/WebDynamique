@@ -1,0 +1,14 @@
+table,
+th,
+td {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+button {
+    align-items: center;
+    justify-content: center;
+}

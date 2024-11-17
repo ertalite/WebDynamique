@@ -1,0 +1,14 @@
+<form action="{{ url_for('achat', code = code) }}" method="post">
+
+    <label for="name">Nom&nbsp;:</label>
+    <input type="text" id="name" name="name" />
+
+    <label for="code">Code produit&nbsp;:</label>
+    <input type="text" id="code" name="code" value="{{code}}" />
+
+    <label for="livraison">Livraison&nbsp;:</label>
+    <textarea id="livraison" name="livraison">  </textarea>
+
+    <button type="submit">Acheter</button>
+
+</form>

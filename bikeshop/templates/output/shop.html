@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bikeshop</title>
+</head>
+
+<h1> {{ titre }} ⊂(◉‿◉)つ </h1>
+
+<body>
+    <ul>
+
+        {% for (key, value) in Descriptions %}
+        <li> {{ value[0] }} <br>
+            {{ value[1] }} <br>
+            {{ value[2] }} <br>
+            <a href="/velo/{{ key }}"> lien vers la page du vélo </a> <br>
+            <a href="/achat/{{ key }}"> ACHETEZ LE !!!</a>
+
+        </li> <br>
+        {% endfor %}
+    </ul>
+</body>
+
+<a href="/home"> REVENEZ A LA MAISON </a>
+
+</html>
