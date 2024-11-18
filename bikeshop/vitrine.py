@@ -48,4 +48,5 @@ def reassort():
 
 @app.route("/reassort/JSON")
 def getJSON():
-        return jsonify(data = bikeshop.getDescr())
+        data = {"descr" : bikeshop.getDescr(), "invent" : bikeshop.getInvent()}
+        return jsonify(data)
