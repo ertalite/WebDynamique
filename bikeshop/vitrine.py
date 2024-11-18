@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, request
+from flask import Flask, abort, render_template, request, jsonify
 import os
 import json
 import bikeshop
@@ -41,5 +41,11 @@ def achat(code):
     
 @app.route("/reassort")
 def reassort():
-    return render_template("output/reassort.html",
-                           Descriptions = bikeshop.getDescr().items())
+        return render_template(
+                            "output/reassort.html",
+                            Descriptions = bikeshop.getDescr().items()
+                            )
+
+@app.route("/reassort/JSON")
+def getJSON():
+        return jsonify(data = bikeshop.getDescr())
