@@ -39,8 +39,12 @@ def achat(code):
         bikeshop.achat_velo(code)
         return render_template("output/do_achat.html")
     
-@app.route("/reassort")
+@app.route("/reassort", methods = ["POST", "GET"])
 def reassort():
+        if request.method == "POST":
+            jsonData = request.get_json()
+            bikeshop.reassort(jsonData["invent"])
+            return render_template("output/reassort.html")
         return render_template(
                             "output/reassort.html",
                             Descriptions = bikeshop.getDescr().items()

@@ -36,36 +36,79 @@ function initReassort(JSONdata) {
 
 function initReassortHTML(newReassort) {
 
-    var newReassortHTML = "<table><tr><td> Code </td><td> Nom </td><td> Description </td><td> Détails </td><td> Photo </td><td> Ajouter </td><td> Quantité en magasin </td><td> Diminuer </td><td> Supprimer </td></tr>"
+    var newReassortHTML =
+        `<table>
+        <tr>
+            <td> Code </td>
+            <td> Nom </td>
+            <td> Description </td>
+            <td> Détails </td>
+            <td> Photo </td>
+            <td> Ajouter </td>
+            <td> Quantité en magasin </td>
+            <td> Diminuer </td>
+            <td> Supprimer </td></tr>`
 
     for (const ligne of newReassort) {
-        newReassortHTML += `<tr><td> ${ligne["code"]} </td><td> ${ligne["nom"]} </td><td> ${ligne["shortDescr"]} </td><td> ${ligne["longDescr"]} </td><td> Photo </td><td> <button onclick="increment(${ligne["code"]})"> + </button> </td><td id="quantite_${ligne["code"]}"> ${ligne["quantite"]} </td><td> <button onclick="decrement(${ligne["code"]})"> - </button> </td><td> Supprimer </td></tr>`
+        newReassortHTML +=
+            `<tr id="velo_${ligne["code"]}">
+            <td> ${ligne["code"]} </td>
+            <td> ${ligne["nom"]} </td>
+            <td> ${ligne["shortDescr"]} </td>
+            <td> ${ligne["longDescr"]} </td>
+            <td> Photo </td>
+            <td> <button onclick="increment(${ligne["code"]})"> + </button></td>    
+            <td id="quantite_${ligne["code"]}"> ${ligne["quantite"]} </td>
+            <td> <button onclick="decrement(${ligne["code"]})"> - </button> </td>
+            <td> <button onclick="suppressed(${ligne["code"]})"> Supprimer </button> </td>
+        </tr>`
     }
 
-    newReassortHTML += "</table>"
+    newReassortHTML += `</br><<button onclick="commit()"> Commit </button>></table>`
 
     return newReassortHTML
 }
 
 function increment(code) {
-    add = document.getElementById(`quantite${code}`)
+    add = document.getElementById(`quantite_${code}`)
     var incr
     if (JSONdata["invent"][`${code}`].length == 0) { incr = 1 }
-    else { incr = JSONdata["invent"][`${code}`][-1] + 1 }
+    else { incr = JSONdata["invent"][`${code}`][JSONdata["invent"][`${code}`].length - 1] + 1 }
     JSONdata["invent"][`${code}`].push(incr)
     add.innerHTML = JSONdata["invent"][`${code}`].length
 }
 
 function decrement(code) {
-    sub = document.getElementById(`quantite${code}`)
-    console.log(JSONdata["invent"][`${code}`].pop())
+    sub = document.getElementById(`quantite_${code}`)
+    JSONdata["invent"][`${code}`].pop()
     sub.innerHTML = JSONdata["invent"][`${code}`].length
 }
-/*
-function suppressed() {
-
+function suppressed(code) {
+    sup = document.getElementById(`velo_${code}`)
+    sup.style.opacity = 0.33
+    sup.innerHTML
 }
 function commit() {
+    const suppresed = confirm("Souhaitez-vous confirmer le réassort ?")
+    if (suppressed) {
+        fetch('/reassort', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(JSONdata)
+        })
+            .then(response => {
 
+                if (response.ok) {
+                    console.log(response);
+                }
+                else {
+                    throw Error('Something went wrong');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
 }
-*/
