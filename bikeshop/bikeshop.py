@@ -20,13 +20,18 @@ def getInvent()->list[int]:
        with open("data/invent.json", "r", encoding='utf-8') as p:
               data = p.read()
               return json.loads(data)
+       
+def getImg()->list[str]:
+       with open("data/images.json", "r", encoding='utf-8') as p:
+              data = p.read()
+              return json.loads(data)
 
 def achat_velo(code:str)->None:
        invent = getInvent()
        if len(invent[code]) != 0 :
               del invent[code][-1]
               with open("data/invent.json", "w") as p:
-                     json.dump(json.dumps(invent), p)
+                     json.dump(invent, p)
 
 def reassort(invent)->None:
        with open("data/invent.json", "w") as p:

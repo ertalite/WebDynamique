@@ -25,6 +25,7 @@ function initReassort(JSONdata) {
             "nom": JSONdata["descr"][`${key}`]["0"],
             "shortDescr": JSONdata["descr"][`${key}`]["1"],
             "longDescr": JSONdata["descr"][`${key}`]["2"],
+            "img": JSONdata["img"][`${key}`],
             "quantite": JSONdata["invent"][`${key}`].length,
             "suppressed": false
         })
@@ -55,8 +56,11 @@ function initReassortHTML(newReassort) {
             <td> ${ligne["code"]} </td>
             <td> ${ligne["nom"]} </td>
             <td> ${ligne["shortDescr"]} </td>
-            <td> ${ligne["longDescr"]} </td>
-            <td> Photo </td>
+            <td> <details> <summary> Détails </summary>
+                    <p>${ligne["longDescr"]}</p>
+                </details>
+            </td>
+            <td> <img src="${ligne["img"]}" alt="Image non disponible" height="125" width="125"/> </td>
             <td> <button onclick="increment(${ligne["code"]})"> + </button></td>    
             <td id="quantite_${ligne["code"]}"> ${ligne["quantite"]} </td>
             <td> <button onclick="decrement(${ligne["code"]})"> - </button> </td>
