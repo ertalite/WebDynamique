@@ -23,7 +23,7 @@ def getInvent()->list[int]:
 
 def achat_velo(code:str)->None:
        invent = getInvent()
-       if len(invent[code]) == 0 :
+       if len(invent[code]) != 0 :
               del invent[code][-1]
               with open("data/invent.json", "w") as p:
                      json.dump(json.dumps(invent), p)
