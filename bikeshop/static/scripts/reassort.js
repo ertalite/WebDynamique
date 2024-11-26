@@ -34,7 +34,6 @@ function initReassort(JSONdata) {
     return newReassort
 }
 
-
 function initReassortHTML(newReassort) {
 
     var newReassortHTML =

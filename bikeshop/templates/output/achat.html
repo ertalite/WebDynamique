@@ -1,16 +1,17 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/formStyle.css') }}">
 
-<form action="{{ url_for('achat', code = code) }}" method="post">
+<div id="feedback-form">
+    <h2 class="header"> Confirmez votre achat </h2>
+    <div>
+        <form action="{{ url_for('achat', code = code) }}" method="post">
+            <input type="text" name="Nom" placeholder="Nom"></input>
+            <input type="text" name="Code" placeholder="Code" value="{{code}}"></input>
 
-    <label for="name">Nom&nbsp;:</label>
-    <input type="text" id="name" name="name" />
+            <label for="feedback-notify"> Se souvenir de mes coordonnées </label>
+            <input type="checkbox" id="feedback-notify" name="notify">
+            <input type="text" id="feedback-phone" name="Adresse" placeholder="Adresse"></input>
 
-    <label for="code">Code produit&nbsp;:</label>
-    <input type="text" id="code" name="code" value="{{code}}" />
-
-    <label for="livraison">Livraison&nbsp;:</label>
-    <textarea id="livraison" name="livraison">  </textarea>
-
-    <button type="submit">Acheter</button>
-
-</form>
+            <button type="submit"> Acheter </button>
+        </form>
+    </div>
+</div>
